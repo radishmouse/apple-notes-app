@@ -1,8 +1,14 @@
 import React from 'react';
 
-function NoteEditor() {
+function NoteEditor({
+    note
+}) {
     return (
-        <textarea value="lorem ipsum blah blah"/>
+        <div>
+            <input value={note.title} />
+            <br />
+            <textarea value={note.copy} />
+        </div>
     );
 }
 
