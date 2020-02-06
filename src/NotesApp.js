@@ -51,6 +51,7 @@ class NotesApp extends React.Component {
                 />
                 <NoteEditor 
                     note={this._getNoteById()}
+                    handleChange={this._updateNote}
                 />
             </div>
         );
@@ -85,6 +86,30 @@ class NotesApp extends React.Component {
         }, () => {
             console.log('updated current id')
         });
+    }
+
+    _updateNote = (changedNote) => {
+        console.table(changedNote);
+
+        // Alternative to super-extra-fancy version that uses .map()
+        // const updatedNotesArray = [ ...this.state.notes ];
+        // const theIndex = updatedNotesArray.findIndex(note => note.id === changedNote.id);
+        // updatedNotesArray[theIndex] = changedNote;
+
+        // Super-extra-fancy version:
+        const updatedNotesArray = this.state.notes.map(note => {
+            if (note.id !== this.state.currentNoteId) {
+                return note;
+            } else {
+                return changedNote;
+            }
+        });
+
+        this.setState({
+            notes: updatedNotesArray
+        }, () => {
+            console.log(`Updated note with id ${changedNote.id}`);
+        });     
     }
 }
 
